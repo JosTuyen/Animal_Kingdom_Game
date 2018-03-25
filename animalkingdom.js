@@ -1,5 +1,6 @@
 "use strict";
 
+var prefix = "https://jostuyen.github.io/Animal_Kingdom_Game";
 class Game {
   constructor() {
     //n rand 8...12: pusher rand bottomrow facing N
@@ -133,14 +134,14 @@ function showBoard(data) {
 	var pengu = new Image();
 	var snake = new Image();
 	var background = new Image();
-	zebra.src = '/Libraries/Pictures/zebra.png';
-	croco.src = '/Libraries/Pictures/crocodile.png';
-	eleph_u.src = '/Libraries/Pictures/elephant_u.png';
-	giraf.src = '/Libraries/Pictures/giraffe.png';
-	goril.src = '/Libraries/Pictures/gorilla.png';
-	pengu.src = '/Libraries/Pictures/penguin.png';
-	snake.src = '/Libraries/Pictures/snake.png';
-	background.src = "/Libraries/Pictures/bkgr_rain.jpg";
+	zebra.src = prefix + '/Libraries/Pictures/zebra.png';
+	croco.src = prefix + '/Libraries/Pictures/crocodile.png';
+	eleph_u.src = prefix + '/Libraries/Pictures/elephant_u.png';
+	giraf.src = prefix + '/Libraries/Pictures/giraffe.png';
+	goril.src = prefix + '/Libraries/Pictures/gorilla.png';
+	pengu.src = prefix + '/Libraries/Pictures/penguin.png';
+	snake.src = prefix + '/Libraries/Pictures/snake.png';
+	background.src = prefix + "/Libraries/Pictures/bkgr_rain.jpg";
 	var listWage = [snake, goril, croco];
 	var listTarg = ["", pengu, zebra, giraf];
 	//==================drawTable================
