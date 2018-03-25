@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Animal Kingdom!</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<style>
+			#title{
+				text-align:center;
+				font-family: "Comic Sans MS";
+				font-size: 50px;
+				color: #40A25D;
+				padding: 0;
+				margin: 0;
+			}
+			#content{
+				position: fixed;
+				float: left;
+				max-width: 400px;
+				margin-top: 100px;
+				padding: 0px;
+				font-size: 16px;
+				color: black;
+				font-weight: bold;
+				font-family: verdana;
+			}
+			#graphic{
+				display: block;
+				padding-left: 0;
+				padding-right: 0;
+				margin-left: auto;
+				margin-right: auto;
+				border:5px solid #330033;
+			}
+		</style>
+	<script src="/script/utils.js"></script>
+	</head>
+	<body background="/Libraries/Pictures/wood.jpg">
+		<p id="title" >ANIMAL KINGDOM</p>
+		<p id="content">
+			<b>Rules:</b><br>
+			1) The elephant will save endanger species by pushing them to origin place
+			which it appear in the first time<br><br>
+			2) To move elephant you have to press :<br>
+			w :up	;	d :right ; s :down ; a :left ; <br>x :explode<br><br>
+			3) One move or one turn costs 1 move<br>
+			One explode costs 100 moves<br><br>
+			4) - Endanger species name and weight:<br>
+			Penguin: 1 ; Zebra: 2 ; Giraffe: 3<br>
+				 - Other species name and weight:<br>
+			Snake: 1 ; Gorilla: 2 ; Crocodile: 3<br><br>
+			5) The max weight which you can push is 3<br>
+			Press any key when you push the target to the origin to end<br>
+		</p>
+		<h2 id="txt" style = "text-align:center; color:black">Time: 0:00:00</h2>
+		<h2 id="moves" style="text-align:center; color:black"></h2>
+		<script src="animalkingdom.js"></script>
+		<canvas id="graphic"></canvas>
+	</body>
+</html>
