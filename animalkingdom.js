@@ -136,11 +136,11 @@ function showBoard(data) {
 	var background = new Image();
 	zebra.src = prefix + '/Libraries/Pictures/zebra.png';
 	croco.src = prefix + '/Libraries/Pictures/crocodile.png';
-	eleph_u.src = prefix + '/Libraries/Pictures/elephant_u.png';
+	eleph_u.src = 'https://jostuyen.github.io/Animal_Kingdom_Game/Libraries/Pictures/elephant_u.png';
 	giraf.src = prefix + '/Libraries/Pictures/giraffe.png';
 	goril.src = prefix + '/Libraries/Pictures/gorilla.png';
 	pengu.src = prefix + '/Libraries/Pictures/penguin.png';
-	snake.src = prefix + '/Libraries/Pictures/snake.png';
+	snake.src = 'https://jostuyen.github.io/Animal_Kingdom_Game/Libraries/Pictures/snake.png';
 	background.src = prefix + "/Libraries/Pictures/bkgr_rain.jpg";
 	var listWage = [snake, goril, croco];
 	var listTarg = ["", pengu, zebra, giraf];
