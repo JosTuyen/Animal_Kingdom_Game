@@ -153,7 +153,7 @@ class DrawTable {
 function showBoard(data, drawTable) {
 	//=================importPicture==============
   var background = new Image();
-  background.src = 'Libraries/Pictures/rain.jpg';
+  background.src = 'Libraries/Pictures/bkgr_rain.jpg';
 	//=================fillAnimal==================
 	background.onload = function () {
 		drawTable.table.drawImage(background,0,0,drawTable.graphic.width,drawTable.graphic.height);
