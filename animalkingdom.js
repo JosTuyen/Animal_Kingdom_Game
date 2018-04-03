@@ -1,6 +1,5 @@
 "use strict";
 
-var prefix = "https://jostuyen.github.io/Animal_Kingdom_Game";
 class Game {
   constructor() {
     //n rand 8...12: pusher rand bottomrow facing N
@@ -16,21 +15,21 @@ class Game {
 		this.targ = {"r":0, "c":0, "wt":0};
 		this.bob = {"r":0, "c":0, "dir":0, "origin":0};
 		this.bob.r = this.n-1;
-		this.bob.origin = this.bob.c = Math.floor(Math.random()*(this.n-1));
-		this.targ.c = Math.floor(Math.random()*(this.n-2)+1);
-		this.targ.r = Math.floor(Math.random()*(this.n-2)+1);
+		this.bob.origin = this.bob.c = Math.floor(Util.random()*(this.n-1));
+		this.targ.c = Math.floor(Util.random()*(this.n-2)+1);
+		this.targ.r = Math.floor(Util.random()*(this.n-2)+1);
 		//Generate new board
 		this.b = [];
 
 		for(var r = 0;r < this.n;r++){
 			var col =[];
 			for(var c = 0; c < this.n;c++){
-				var idx = Math.floor(Math.random()*this.listValue.length);
+				var idx = Math.floor(Util.random()*this.listValue.length);
 				col[c]=this.listValue[idx];
 			}
 			this.b[r] = col;
 		}
-		this.targ.wt = this.b[this.targ.r][this.targ.c] = Math.floor(Math.random()*3)+1;
+		this.targ.wt = this.b[this.targ.r][this.targ.c] = Math.floor(Util.random()*3)+1;
 		this.b[this.bob.r][this.bob.c] = 0;
   }
 
@@ -115,66 +114,66 @@ class Game {
 	}
 }
 
-function rotate(ctx, img, x, y, w, h, dir) {
-	ctx.save();
-	ctx.translate(x+w/2,y+h/2);
-	ctx.rotate(Math.PI/2*dir);
-	ctx.translate(-(x+w/2),-(y+h/2));
-	ctx.drawImage(img,x,y,w,h);
-	ctx.restore();
+class DrawTable {
+  constructor(data){
+    this.zebra = new Image();
+  	this.croco = new Image();
+  	this.eleph_u = new Image();
+  	this.giraf = new Image();
+  	this.goril = new Image();
+  	this.pengu = new Image();
+  	this.snake = new Image();
+
+  	this.zebra.src = 'Libraries/Pictures/zebra.png';
+  	this.croco.src = 'Libraries/Pictures/crocodile.png';
+  	this.eleph_u.src = 'Libraries/Pictures/elephant_u.png';
+  	this.giraf.src = 'Libraries/Pictures/giraffe.png';
+  	this.goril.src = 'Libraries/Pictures/gorilla.png';
+  	this.pengu.src = 'Libraries/Pictures/penguin.png';
+  	this.snake.src = 'Libraries/Pictures/snake.png';
+  	this.listWage = [this.snake, this.goril, this.croco];
+  	this.listTarg = ["", this.pengu, this.zebra, this.giraf];
+  	//==================drawTable================
+  	this.graphic = document.getElementById('graphic');
+  	this.table = this.graphic.getContext("2d");
+  	this.graphic.width = data.n*40;
+  	this.graphic.height = data.n*40;
+  	this.table.lineWidth = 2;
+
+  	for(var s = 1; s<=data.n; s++){
+  		this.table.moveTo(s*40,0);
+  		this.table.lineTo(s*40,data.n*40);
+  		this.table.moveTo(0,s*40);
+  		this.table.lineTo(data.n*40,s*40);
+  		this.table.stroke();
+  	}
+  }
 }
 
-function showBoard(data) {
+function showBoard(data, drawTable) {
 	//=================importPicture==============
-	var zebra = new Image();
-	var croco = new Image();
-	var eleph_u = new Image();
-	var giraf = new Image();
-	var goril = new Image();
-	var pengu = new Image();
-	var snake = new Image();
-	var background = new Image();
-	zebra.src = prefix + '/Libraries/Pictures/zebra.png';
-	croco.src = prefix + '/Libraries/Pictures/crocodile.png';
-	eleph_u.src = prefix +'/Libraries/Pictures/elephant_u.png';
-	giraf.src = prefix + '/Libraries/Pictures/giraffe.png';
-	goril.src = prefix + '/Libraries/Pictures/gorilla.png';
-	pengu.src = prefix + '/Libraries/Pictures/penguin.png';
-	snake.src = prefix + '/Libraries/Pictures/snake.png';
-	background.src = prefix + "/Libraries/Pictures/bkgr_rain.jpg";
-	var listWage = [snake, goril, croco];
-	var listTarg = ["", pengu, zebra, giraf];
-	//==================drawTable================
-	var graphic = document.getElementById('graphic');
-	var table = graphic.getContext("2d");
-	graphic.width = data.n*40;
-	graphic.height = data.n*40;
-	table.lineWidth = 2;
-
-	for(var s = 1; s<=data.n; s++){
-		table.moveTo(s*40,0);
-		table.lineTo(s*40,data.n*40);
-		table.moveTo(0,s*40);
-		table.lineTo(data.n*40,s*40);
-		table.stroke();
-	}
+  var background = new Image();
+  background.src = 'Libraries/Pictures/rain.jpg';
 	//=================fillAnimal==================
 	background.onload = function () {
-		table.drawImage(background,0,0,graphic.width,graphic.height);
+		drawTable.table.drawImage(background,0,0,drawTable.graphic.width,drawTable.graphic.height);
+    drawTable.table.fillStyle = "#ff751a";
+    drawTable.table.fillRect(40*data.bob.origin,(data.n-1)*40,40,40);
 		for(var r = 0; r < data.n; r++){
 			for(var c = 0; c < data.n; c++){
 				if(r == data.targ.r && c == data.targ.c)
-					table.drawImage(listTarg[data.targ.wt],40*c+3,40*r+3,34,34);
+					drawTable.table.drawImage(drawTable.listTarg[data.targ.wt],40*c+3,40*r+3,34,34);
 
 				else if( r == data.bob.r && c == data.bob.c)
-					rotate(table,eleph_u,40*c+3,40*r+3,34,34,data.bob.dir);
+          Util.drawRotatedImage(drawTable.table, data.bob.dir*Math.PI/2, drawTable.eleph_u, 40*c+3, 40*r+3, 34, 34);
 
 				else if(data.b[r][c]>0)
-						table.drawImage(listWage[data.b[r][c]-1],40*c+3,40*r+3,34,34);
+						drawTable.table.drawImage(drawTable.listWage[data.b[r][c]-1],40*c+3,40*r+3,34,34);
 			}
 		}
-		table.stroke();
+		drawTable.table.stroke();
 	}
+
 	document.getElementById("moves").innerHTML = "Moves: "+data.moves;
 }
 //===================Running Time==================
@@ -183,6 +182,7 @@ window.onload = function(){
 	var start = true;
 	var t;
 	var count = 0;
+  var drawTable = new DrawTable(game);
   if(document.readyState == 'complete')
 	document.onkeypress =  function (ev){
 		if(start){
@@ -202,9 +202,9 @@ window.onload = function(){
 		}
 			var key = ev.keyCode;
 			var ret = game.move(key);
-			showBoard(game);
+			showBoard(game, drawTable);
 	};
-	showBoard(game);
+	showBoard(game, drawTable);
 	//Calculate time and showClock
 	function timeCount() {
 		count += 1;
